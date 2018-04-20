@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Harmobeer - Login</title>
+	<link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
+    crossorigin="anonymous" />
+    <style>
+    	.card{
+    		background-color:rgba(219,181,67,1);
+    	}
+        .btn.yellow{
+            border-color: #DAA520;
+            color: #daa520;
+        }
+        .btn.yellow:hover{
+            border-color: #DAA520;
+            background-color: #daa520;
+            color: #ffffff;
+        }
+        
+    </style>
+</h:head>
+<body>
+
+	<h:form styleClass="container-fluid">
+
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 class="card-title">Bem-vindo ao Harmobeer, o seu site de harmonização de cervejas!</h4>
+                <div>
+                    <img
+                        src="https://images.vexels.com/media/users/3/141144/isolated/preview/41f85e7307c63d96eda93599bccd9f51-prato-de-salada-by-vexels.png" style="width: 300px" />
+                    <img
+                        src="http://images.clipartlogo.com/files/images/16/160193/beer-mug_t" />
+                    <img
+                        src="http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/256/Pizza-icon.png" />
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">&nbsp;</div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label for="login">Login</label>
+                            <h:inputText id="login" value="#{harmoBeerBean.username}" styleClass="form-control" required="true"></h:inputText>
+                        </div>
+                        <div class="form-group">
+                            <label for="senha">Senha</label>
+                            <h:inputSecret id="senha" value="#{harmoBeerBean.senha}" styleClass="form-control" required="true"></h:inputSecret>
+                        </div>
+                        <div class="form-group">
+                            <h:commandButton action="#{harmoBeerBean.entrar()}" value="Entrar" styleClass="btn btn-light btn-lg btn-block yellow" />
+                        </div>
+                    </div>
+                    <div class="col-lg-2">&nbsp;</div>
+                    
+                </div>
+            </div>
+            <div class="alert alert-info" role="alert">
+                <strong><h:commandLink action="/usuario/cadastroUsuario"
+                    value="Ainda não é membro? Cadastre-se aqui!" /></strong>
+            </div>
+        </div>
+	</h:form>
+</body>
+</html>

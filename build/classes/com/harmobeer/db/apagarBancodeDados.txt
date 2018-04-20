@@ -1,0 +1,16 @@
+drop table avaliacao;
+drop table harmonizacao;
+drop table prato;
+drop table cerveja;
+drop table usuario;
+
+drop sequence sequsuario;
+drop sequence seqharmo;
+drop sequence seqprato;
+drop sequence seqcerv;
+drop sequence seqaval;
+
+
+commit;
+
+

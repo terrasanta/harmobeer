@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Harmobeer - Main</title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
+    crossorigin="anonymous" />
+    <style>
+        .btn.yellow{
+            border-color: #DAA520;
+            color: #daa520;
+        }
+        .btn.yellow:hover{
+            border-color: #DAA520;
+            background-color: #daa520;
+            color: #ffffff;
+        }
+    </style>
+</h:head>
+<body>
+	<h:form>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="">Harmobeer</a>
+            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                            <h:commandLink action="/usuario/editarUsuario"
+                            value="Alterar Perfil" styleClass="nav-link" />
+                    </li>
+                    <li class="nav-item">
+                            <h:commandLink action="/usuario/editarSenha"
+                            value="Alterar Senha" styleClass="nav-link" />
+                    </li>
+                    <li class="nav-item">
+                            <h:commandLink
+								action="#{harmoBeerBean.retornarSuasAval()}"
+								value="Suas Avaliacoes" styleClass="nav-link" />
+                    </li>
+                    <li class="nav-item">
+                            <h:commandLink action="/index" value="Sair do Sistema" styleClass="nav-link" />
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0">
+                    <h:inputText id="buscar" value="#{harmoBeerBean.buscar}" styleClass="form-control mr-sm-2"></h:inputText><br />
+                    <h:commandButton action="#{harmoBeerBean.buscarCerv()}"
+					value="Buscar Cerveja" styleClass="btn btn-outline-success my-2 my-sm-0 yellow" />
+
+				<h:commandButton action="#{harmoBeerBean.buscarPrato()}"
+					value="Buscar Prato" styleClass="btn btn-outline-success my-2 my-sm-0 yellow" />
+
+				<h:commandButton action="#{harmoBeerBean.buscarUser()}"
+					value="Buscar Usuario" styleClass="btn btn-outline-success my-2 my-sm-0 yellow" />
+                </div>
+            </div>
+        </nav>
+
+		<!--<table width="50%" style="height: 40px" align="right">
+			<tbody>
+				<tr>
+					<h:outputText value="O que deseja buscar?"></h:outputText>
+				</tr>
+				<br />
+
+				<h:outputText style="font-size: 12px"
+					value="Para fazer uma busca em toda a base de dados, deixe o campo em branco."></h:outputText>
+				<br />
+				<h:outputText style="font-size: 10px"
+					value="Caso nao haja nenhum correspondente, o sistema trara a lista completa "></h:outputText>
+				<br />
+				<h:inputText id="buscar" value="#{harmoBeerBean.buscar}" size="60"></h:inputText>
+				<br />
+				<h:commandButton action="#{harmoBeerBean.buscarCerv()}"
+					value="Buscar Cerveja" />
+
+				<h:commandButton action="#{harmoBeerBean.buscarPrato()}"
+					value="Buscar Prato" />
+
+				<h:commandButton action="#{harmoBeerBean.buscarUser()}"
+					value="Buscar Usuario" />
+
+			</tbody>
+
+		</table>-->
+
+	</h:form>
+	<h:form>
+		<div align="center">Ops! Parece que algo deu errado durante a transação com a sua cerveja!
+		<br />
+		Verifique os dados novamente ou espere um tempo para tentar novamente!
+		<br/>
+		<br/>
+		Nome da Cerveja e seu estilo devem ter no máximo 60 caracteres.
+		<br />
+		Teor Alcoolico deve estar entre 0 e 70%.
+		<br />
+		<br />
+		<img src="https://3.bp.blogspot.com/-bZk-cTgbfFk/Vd5Hf0Qne3I/AAAAAAAAPMo/PKmTpnbHYTIRay6sRpVNQ2BLzoLjokwSQCKgB/s1600/beer-bottle-emoji-collection-5-001.png" width="250" height="500"/>
+		<br />
+		
+	</div>
+	</h:form>
+	<h:form>
+		<h:commandButton value="Voltar para a administração de cervejas"
+			action="#{harmoBeerBean.adminBuscarCerv()}" />
+	</h:form>
+
+</body>
+</html>

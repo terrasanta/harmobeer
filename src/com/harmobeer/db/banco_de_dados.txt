@@ -1,0 +1,418 @@
+create user harmobeer identified by harmobeer;
+
+grant connect, resource to harmobeer;
+
+
+CREATE TABLE Usuario(
+id_user INTEGER NOT NULL,
+username VARCHAR2(20) NOT NULL,
+email VARCHAR2(50) NOT NULL,
+senha VARCHAR2(20) NOT NULL,
+privilegio char(1) NOT NULL,
+info VARCHAR2(200) NULL,
+CONSTRAINT check_privilegio CHECK (privilegio IN ('1','0')),
+CONSTRAINT pk_id_user PRIMARY KEY (ID_user));
+
+CREATE TABLE Cerveja(
+id_cerv INTEGER NOT NULL,
+nm_cerv VARCHAR2(60) NOT NULL,
+nm_estilo VARCHAR2(60) NOT NULL,
+teor_alcoolico NUMBER (6,2) NOT NULL,
+CONSTRAINT pk_id_cerv PRIMARY KEY (ID_cerv));
+
+CREATE TABLE Prato(
+id_prato INTEGER NOT NULL,
+nm_prato VARCHAR2(30) NOT NULL,
+CONSTRAINT pk_id_prato PRIMARY KEY (ID_prato));
+
+CREATE TABLE Harmonizacao(
+id_harmo INTEGER NOT NULL,
+id_cerv INTEGER NOT NULL,
+id_prato INTEGER NOT NULL,
+media NUMBER (5,2) NOT NULL,
+CONSTRAINT fk_id_cerv FOREIGN KEY (ID_cerv) REFERENCES Cerveja(ID_cerv),
+CONSTRAINT fk_id_prato FOREIGN KEY (ID_prato) REFERENCES Prato(ID_prato),
+CONSTRAINT pk_id_harmo PRIMARY KEY (ID_harmo));
+
+CREATE TABLE Avaliacao(
+id_aval INTEGER NOT NULL,
+id_harmo INTEGER NOT NULL,
+id_user INTEGER NOT NULL,
+nota INTEGER NOT NULL,
+comentario VARCHAR2(140) NOT NULL,
+CONSTRAINT fk_id_harmo FOREIGN KEY (ID_harmo) REFERENCES Harmonizacao(ID_harmo),
+CONSTRAINT fk_id_user FOREIGN KEY (ID_user) REFERENCES Usuario(ID_user),
+CONSTRAINT pk_ PRIMARY KEY (id_aval));
+
+CREATE SEQUENCE sequsuario;
+
+CREATE SEQUENCE seqcerv;
+
+CREATE SEQUENCE seqprato;
+
+CREATE SEQUENCE seqharmo;
+
+CREATE SEQUENCE seqaval;
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Maniba Black Metal IPA','American-Style Black Ale', 7.2);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Seasons Holy Cow', 'Double India Pale Ale', 7.5);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Jambreiro LebensKraft', 'German-Style Kolsch', 4.5);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Serra de tres pontas cafuza', 'American-Style Imperial Stout', 8.5);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Bodebrown Cacau IPA', 'American-Style India Pale Ale', 6.1);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'2Cabecas Hi5', 'American-Style Black Ale', 6.2);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Colorado Demoiselle', 'Brown Porter', 6.0);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Backer Pele Vermelha', 'American-Style India Pale Ale', 7.0);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Insana Chocolate Porter', 'Brown Porter', 4.9);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Dado Bier Double Chocolate Stout', 'Chocolate/Cocoa-flavored Beer', 10.5);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Brassaria Ampolis Biritis', 'Vienna-Style Lager', 4.8);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Baden Baden Celebration Inverno', 'German-Style Doppelbock', 8.2);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Backer Bravo', 'Wood and Barrel-Aged Strong Beer', 9.0);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Morada Hop Arabica', 'Coffee-flavored beer', 5.0);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Tormenta Hoppy Day', 'American-Style India Pale Ale', 6.5);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Wals Dubbel', 'Belgian-Style Dubbel', 7.5);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Falke Tripel Monasterium', 'Belgian-Style Tripel', 9.0);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Coruja Coice', 'Specialty Beer', 11.5);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Coruja Baca', 'American-Style Fruit Beer', 5.7);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Colorado Ithaca', 'British-Style Imperial Stout', 10.5);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Colorado Indica', 'English-Style India Pale Ale', 7.0);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Bierland Blumenau', 'Historical Beer', 4.0);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Fraga Weiss', 'South German-Style Hefeweizen', 5.0);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Grimor 21', 'Herb and Spice Beer', 4.5);
+
+insert into cerveja(id_cerv, nm_cerv, nm_estilo, teor_alcoolico) values(seqcerv.nextval,'Morada Gasoline Soul', 'Scotch Ale', 6.7);
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Carne');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Frango');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Peixe');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Nozes');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Cordeiro');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Frutas Citricas');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Damasco');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Pao');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Porco');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Coxinha');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Pastel');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Queijos');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Pao doce');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Frutas Vermelhas');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Bolachas');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Biscoitos');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Carne de soja');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Legumes');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Strogonoff de carne');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Strogonoff de frango');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Salada Verde');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Lasanha bolonhesa');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Molho Pesto');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Comida Mexicana');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Uvas');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Comida Japonesa');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Pizza');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Carneiro');
+
+insert into prato(id_prato, nm_prato) values (seqprato.nextval,'Caviar');
+
+insert into usuario(id_user, username, email, senha, privilegio, info) values(sequsuario.nextval,'Jose', 'jose@harmobeer.com', 'jose123',1, 'Administrador');
+
+insert into usuario(id_user, username, email, senha, privilegio, info) values(sequsuario.nextval,'Luan', 'luan@harmobeer.com', 'luan123',1, 'Administrador');
+
+insert into usuario(id_user, username, email, senha, privilegio, info) values(sequsuario.nextval,'1', '1@harmobeer.com', '1',0, 'Para testes');
+
+INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario1', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ 
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario1', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario2', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario3', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario4', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario5', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario6', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario7', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario8', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario9', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario10', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario11', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario12', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario13', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario14', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario15', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario16', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario17', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario18', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario19', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario20', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario21', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario22', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario23', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario24', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario25', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario26', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario27', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario28', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario29', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario30', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario31', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario32', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario33', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario34', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario35', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario36', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario37', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario38', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario39', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario40', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario41', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario42', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario43', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario44', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario45', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario46', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario47', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+ INSERT INTO usuario (id_user, username, email, senha, privilegio, info) values (sequsuario.nextval,'usuario48', 'usuario1@gmail.com', 'teste',0, 'Para popular');
+
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,1,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,2,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,3,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,4,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,5,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,6,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,7,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,8,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,9,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,10,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,11,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,2,5,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,3,5,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,4,2,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,5,3,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,8,15,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,9,10,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,5,10,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,9,2,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,2,3,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,10,5,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,3,6,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,7,3,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,1,20,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,2,2,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,3,3,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,4,4,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,5,5,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,6,6,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,7,7,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,8,8,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,9,9,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,10,10,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,11,11,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,12,12,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,13,13,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,14,14,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,15,15,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,4,1,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,4,3,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,4,6,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,4,5,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,4,7,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,5,6,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,5,7,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,5,8,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,5,9,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,5,12,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,5,14,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,9,11,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,14,19,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,4,21,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,12,17,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,14,15,0);
+insert into harmonizacao(id_harmo, id_cerv, id_prato, media) values(seqharmo.nextval,16,15,0);
+
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,1,1,1,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,5,2,2,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,2,32,2,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,22,4,3,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,30,4,3,'Muito Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,5,3,'Ruim');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,11,11,3,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,10,3,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,12,10,4,'Atenuou o sabor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,11,9,2,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,12,11,1,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,30,4,3,'Muito Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,14,5,3,'Ruim');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,6,11,2,'Pior Impossivel');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,10,3,'Fraquissimo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,7,10,4,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,6,9,2,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,5,11,1,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,25,4,3,'Muito Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,11,6,3,'Ruim');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,22,2,'Pior Impossivel');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,12,3,'Fraquissimo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,3,15,4,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,1,10,4,'Fraco como agua');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,7,19,1,'Muito amargo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,3,15,4,'Regular');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,20,4,'Ja tive melhores');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,25,25,1,'Muito ruim, 5 estrelas');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,22,2,'Pior Impossivel');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,12,3,'Fraquissimo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,3,15,4,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,9,5,4,'Fraco como agua');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,2,1,'Muito amargo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,3,5,4,'Regular');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,25,20,4,'Ja tive melhores');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,25,2,1,'Muito ruim, 5 estrelas');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,22,2,'Pior Impossivel');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,12,3,'Fraquissimo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,3,15,4,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,11,15,4,'Fraco como agua');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,7,28,1,'Muito amargo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,3,15,4,'Regular');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,19,20,4,'Ja tive melhores');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,35,1,'Muito ruim, 5 estrelas');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,10,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,8,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,13,5,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,11,11,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,9,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,14,6,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,8,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,1,1,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,2,2,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,11,7,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,12,9,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,14,10,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,12,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,15,8,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,6,5,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,18,5,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,14,20,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,25,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,15,8,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,15,7,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,2,3,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,21,5,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,11,10,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,14,11,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,1,10,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,28,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,17,35,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,11,1,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,4,2,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,2,1,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,8,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,1,19,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,2,20,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,31,7,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,12,11,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,14,13,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,1,2,1,'Muito amargo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,2,5,4,'Regular');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,3,20,4,'Ja tive melhores');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,4,2,1,'Muito ruim, 5 estrelas');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,5,22,2,'Pior Impossivel');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,6,12,3,'Fraquissimo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,7,15,4,'Fraco');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,15,4,'Fraco como agua');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,9,28,1,'Muito amargo');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,10,15,4,'Regular');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,11,20,4,'Ja tive melhores');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,12,35,1,'Muito ruim, 5 estrelas');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,13,10,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,14,8,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,15,5,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,16,11,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,17,9,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,18,6,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,19,8,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,20,1,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,21,2,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,22,7,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,23,9,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,24,10,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,25,12,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,26,8,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,27,5,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,28,5,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,29,20,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,30,25,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,31,8,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,32,7,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,33,3,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,34,5,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,35,10,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,36,11,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,37,10,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,38,28,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,39,35,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,40,1,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,41,2,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,42,1,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,43,8,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,44,19,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,45,20,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,46,7,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,47,11,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,48,13,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,49,1,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,50,2,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,51,1,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,52,8,10,'Nao sei como tornaria isso melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,53,19,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,54,20,7,'Regular, poderia ser muito melhor');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,55,7,10,'Sinal de deus');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,56,11,9,'Faltou um ponto para um 10');
+insert into avaliacao(id_aval, id_harmo, id_user, nota, comentario) values(seqaval.nextval,8,13,7,'Regular, poderia ser muito melhor');
+
+commit;
+
+

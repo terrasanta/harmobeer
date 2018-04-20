@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Harmobeer - Main</title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" 
+    crossorigin="anonymous" />
+    <style>
+        .btn.yellow{
+            border-color: #DAA520;
+            color: #daa520;
+        }
+        .btn.yellow:hover{
+            border-color: #DAA520;
+            background-color: #daa520;
+            color: #ffffff;
+        }
+    </style>
+</h:head>
+<body>
+	<h:form>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="">Harmobeer</a>
+            <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                            <h:commandLink action="/usuario/editarUsuario"
+                            value="Alterar Perfil" styleClass="nav-link" />
+                    </li>
+                    <li class="nav-item">
+                            <h:commandLink action="/usuario/editarSenha"
+                            value="Alterar Senha" styleClass="nav-link" />
+                    </li>
+                    <li class="nav-item">
+                            <h:commandLink
+								action="#{harmoBeerBean.retornarSuasAval()}"
+								value="Suas Avaliacoes" styleClass="nav-link" />
+                    </li>
+                    <li class="nav-item">
+                            <h:commandLink action="/index" value="Sair do Sistema" styleClass="nav-link" />
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0">
+                    <h:inputText id="buscar" value="#{harmoBeerBean.buscar}" styleClass="form-control mr-sm-2"></h:inputText><br />
+                    <h:commandButton action="#{harmoBeerBean.buscarCerv()}"
+					value="Buscar Cerveja" styleClass="btn btn-outline-success my-2 my-sm-0 yellow" />
+
+				<h:commandButton action="#{harmoBeerBean.buscarPrato()}"
+					value="Buscar Prato" styleClass="btn btn-outline-success my-2 my-sm-0 yellow" />
+
+				<h:commandButton action="#{harmoBeerBean.buscarUser()}"
+					value="Buscar Usuario" styleClass="btn btn-outline-success my-2 my-sm-0 yellow" />
+                </div>
+            </div>
+        </nav>
+	</h:form>
+	<h:form>
+		<table width="50%" style="height: 150px" align="center"
+			cellpadding="5" cellspacing="10" border="10">
+			<tbody>
+				<tr>
+					<td align="left"><span class="title"><h:outputText
+								value="#{harmoBeerBean.nm_cerv}" /></span><br /> <span class="body2"><h:outputText
+								value="Estilo: " /></span> <h:outputText
+							value="#{harmoBeerBean.estilo_cerv}" /> <br /> <span
+						class="body2"><h:outputText value="Teor Alcoolico: " /></span> <h:outputText
+							value="#{harmoBeerBean.teor_alcoolico}%" /></td>
+				</tr>
+
+				<tr>
+					<td align="right"><span class="title"><h:outputText
+								value="#{harmoBeerBean.nm_prato}" /></span></td>
+				</tr>
+				<tr>
+					<td align="center" width="30%" valign="middle"><span
+						class="title"><h:outputText
+								value="Media Atual: #{harmoBeerBean.media}" /></span></td>
+				</tr>
+			</tbody>
+		</table>
+	</h:form>
+	<br />
+	<h:form>
+		<table align="center">
+			<tbody>
+				<tr>
+					<td align="center"><h:dataTable
+							value="#{harmoBeerBean.avaliacoes}" var="avaliacao"
+							styleClass="order-table" headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
+
+							<h:column>
+								<f:facet name="header">Nome do usuario</f:facet>    				
+      #{avaliacao.username}
+   </h:column>
+
+							<h:column>
+								<f:facet name="header">Nota</f:facet>
+      #{avaliacao.nota}
+   </h:column>
+
+							<h:column>
+								<f:facet name="header">Comentario</f:facet>
+      #{avaliacao.comentario}
+   </h:column>
+
+
+						</h:dataTable></td>
+				</tr>
+			</tbody>
+		</table>
+	</h:form>
+	<br />
+	<br />
+	<h:form>
+
+		<span style="font-size: 25px"><b>Deseja fazer uma
+				avaliacao?</b></span>
+		<br />
+		<h:outputText value="Qual nota deseja dar?" />
+		<br />
+		<br />
+		<h:selectOneRadio value="#{harmoBeerBean.nota}" required="true">
+			<h:outputText value=" 1 - Muito ruim " />
+			<h:outputText value=" 10 - Maravilhosa " />
+			<br />
+			<f:selectItem itemValue="1" itemLabel="1"></f:selectItem>
+			<f:selectItem itemValue="2" itemLabel="2"></f:selectItem>
+			<f:selectItem itemValue="3" itemLabel="3"></f:selectItem>
+			<f:selectItem itemValue="4" itemLabel="4"></f:selectItem>
+			<f:selectItem itemValue="5" itemLabel="5"></f:selectItem>
+			<f:selectItem itemValue="6" itemLabel="6"></f:selectItem>
+			<f:selectItem itemValue="7" itemLabel="7"></f:selectItem>
+			<f:selectItem itemValue="8" itemLabel="8"></f:selectItem>
+			<f:selectItem itemValue="9" itemLabel="9"></f:selectItem>
+			<f:selectItem itemValue="10" itemLabel="10"></f:selectItem>
+
+		</h:selectOneRadio>
+		<br />
+		<h:outputText value="Faça algum comentario sobre a sua experiência:" />
+		<h:inputText value="#{harmoBeerBean.comentario}"></h:inputText>
+		<br />
+		<h:outputText style="font-size:10px"
+			value="O comentário deve ter no máximo 140 caracteres" />
+		<br />
+		<h:commandButton value="Submeter avaliacao"
+			action="#{harmoBeerBean.avaliarHarmonizacao()}"></h:commandButton>
+
+	</h:form>
+	<br />
+	<h:form>
+		<h:commandButton value="Voltar para o menu principal"
+			action="#{harmoBeerBean.retornarMenuPrincipal()}" />
+	</h:form>
+
+</body>
+</html>
